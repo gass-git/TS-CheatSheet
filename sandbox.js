@@ -1,3 +1,6 @@
+/**
+ * @abstract --- Explicit Types ---
+ */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,9 +10,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function add(a, b, c = 2) {
+let name;
+let nationality;
+let haight; // meters
+let weight; // kilograms  
+let readyForLunch;
+name = 'Astrolux';
+nationality = 'German';
+haight = 70;
+weight = 30000;
+readyForLunch = true;
+readyForLunch = 'false'; // <--- Throws error
+/**
+ * @abstract --- TS Function Basics ---
+ *
+ */
+// --- EXAMPLE 1 ---
+let add;
+/* if a 'c' parameter is not passed to the function it will
+ use 2 as the default value */
+add = (a, b, c = 2) => {
     return a + b + c;
-}
+};
+console.log(add(2, 3)); // <--- outputs: 7
+// --- EXAMPLE 2 ---
+let remainder;
+// Explicitly show that this function returns a number
+remainder = (a, b) => {
+    return a % b;
+};
+// --- EXAMPLE 3 ---
+// Explicitly show that function is void
+let greet;
+greet = (a, b) => console.log(`${a} ${b}`);
 function getPhrase(object) {
     return 'The dog named ' + object.name + ' is ' + object.age + ' old';
 }
@@ -18,11 +51,6 @@ let dog = {
     age: 6
 };
 // -------------------------------
-let greet;
-greet = (a, b) => {
-    console.log(`${a} ${b}`);
-};
-greet('fuck', '!');
 // -------------------------------
 let calc;
 calc = (a, b, action) => {
@@ -112,3 +140,12 @@ function addScore(obj) {
 }
 let newObj = addScore({ name: 'Gass', age: 23 });
 console.log(newObj);
+const docThree = {
+    uid: 1,
+    resourceName: 'person',
+    data: { name: 'shaun' }
+};
+// --------- Tuples #20 --------------
+let values;
+values = [23, 'some text', false];
+// values = ['some text', 34, 23]   // <--- wavy underline

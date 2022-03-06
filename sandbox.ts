@@ -1,6 +1,57 @@
-function add(a: number, b: number, c: number = 2) {
+/** 
+ * @abstract --- Explicit Types ---
+ */
+
+let name: string;
+let nationality: string;
+let haight: number;           // meters
+let weight: number | string;           // kilograms  
+let readyForLunch: boolean;
+
+name = 'Astrolux'
+nationality = 'German'
+haight = 70
+weight = 30000
+readyForLunch = true
+
+readyForLunch = 'false' // <--- Throws error
+
+
+/**
+ * @abstract --- TS Function Basics ---
+ * 
+ */
+
+// --- EXAMPLE 1 ---
+
+let add: Function;
+
+/* if a 'c' parameter is not passed to the function it will
+ use 2 as the default value */
+add = (a: number, b: number, c: number = 2) => {
   return a + b + c
 }
+
+console.log(add(2, 3))   // <--- outputs: 7
+
+
+// --- EXAMPLE 2 ---
+
+let remainder: Function;
+
+// Explicitly show that this function returns a number
+remainder = (a: number, b: number): number => {
+  return a % b
+}
+
+
+// --- EXAMPLE 3 ---
+
+// Explicitly show that function is void
+let greet: (a: string, b: string) => void;
+
+greet = (a, b) => console.log(`${a} ${b}`)
+
 
 // --------------------------------
 
@@ -17,13 +68,9 @@ let dog = {
 
 // -------------------------------
 
-let greet: (a: string, b: string) => void;
 
-greet = (a, b) => {
-  console.log(`${a} ${b}`)
-}
 
-greet('fuck', '!')
+
 
 // -------------------------------
 
@@ -185,6 +232,14 @@ const docThree: Resource<object> = {     // <--- It is specified that <T> is an 
   data: { name: 'shaun' }
 }
 
+
+// --------- Tuples #20 --------------
+
+let values: [number, string, boolean]
+
+values = [23, 'some text', false]
+
+// values = ['some text', 34, 23]   // <--- wavy underline
 
 
 
