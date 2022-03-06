@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @abstract --- Explicit Types ---
  */
@@ -10,12 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let name;
+let rocketName;
 let nationality;
 let haight; // meters
 let weight; // kilograms  
 let readyForLunch;
-name = 'Astrolux';
+rocketName = 'Astrolux';
 nationality = 'German';
 haight = 70;
 weight = 30000;
@@ -43,14 +44,34 @@ remainder = (a, b) => {
 // Explicitly show that function is void
 let greet;
 greet = (a, b) => console.log(`${a} ${b}`);
-function getPhrase(object) {
-    return 'The dog named ' + object.name + ' is ' + object.age + ' old';
+function consolePhrase(object) {
+    console.log('The dog named ' + object.name + ' is ' + object.age + ' years old');
 }
 let dog = {
     name: 'max',
     age: 6
 };
-// -------------------------------
+consolePhrase(dog);
+let carOne = {
+    brand: 'Toyota',
+    model: 'Corolla',
+    year: 2005
+};
+function consoleCarInfo(car) {
+    console.log(`${car.brand} ${car.model} ${car.year}`);
+}
+consoleCarInfo(carOne);
+let tennisPlayer = {
+    name: 'Alexander',
+    age: 26,
+    ranking: 34,
+    competing: true
+};
+let getRanking;
+getRanking = (player) => {
+    return player.ranking;
+};
+console.log(`Ranking: ${getRanking(tennisPlayer)}`);
 // -------------------------------
 let calc;
 calc = (a, b, action) => {
@@ -65,16 +86,6 @@ calc = (a, b, action) => {
 };
 // -------------------------------
 const divElement = document.getElementById('root');
-// ------------------------------
-import { Rainbow } from './classes/rainbow.js';
-let rainbows = [];
-// Populate rainbows[]
-for (let i = 0; i < 5; i++) {
-    rainbows = [new Rainbow(), ...rainbows];
-}
-rainbows.forEach((rainbow) => {
-    console.log(rainbow.lifeSpan);
-});
 let lion = {
     name: 'Choki',
     age: 7,

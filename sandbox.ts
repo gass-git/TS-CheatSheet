@@ -2,19 +2,19 @@
  * @abstract --- Explicit Types ---
  */
 
-let name: string;
+let rocketName: string;
 let nationality: string;
-let haight: number;           // meters
+let haight: number;                    // meters
 let weight: number | string;           // kilograms  
 let readyForLunch: boolean;
 
-name = 'Astrolux'
+rocketName = 'Astrolux'
 nationality = 'German'
 haight = 70
 weight = 30000
 readyForLunch = true
 
-readyForLunch = 'false' // <--- Throws error
+readyForLunch = 'false' // <--- shows error
 
 
 /**
@@ -53,12 +53,16 @@ let greet: (a: string, b: string) => void;
 greet = (a, b) => console.log(`${a} ${b}`)
 
 
-// --------------------------------
+/**
+ * @abstract --- Type Aliases and Function Signatures ---
+ */
 
-type dogObj = { name: string, age: number }
+// --- EXAMPLE 1 ---
 
-function getPhrase(object: dogObj) {
-  return 'The dog named ' + object.name + ' is ' + object.age + ' old'
+type dogObjType = { name: string, age: number }
+
+function consolePhrase(object: dogObjType) {
+  console.log('The dog named ' + object.name + ' is ' + object.age + ' years old')
 }
 
 let dog = {
@@ -66,13 +70,67 @@ let dog = {
   age: 6
 }
 
-// -------------------------------
+consolePhrase(dog)
+
+// --- EXAMPLE 2 ---
+
+type carObjectType = {
+  brand: string,
+  model: string,
+  year: number
+}
+
+let carOne = {
+  brand: 'Toyota',
+  model: 'Corolla',
+  year: 2005
+}
+
+function consoleCarInfo(car: carObjectType): void {
+  console.log(`${car.brand} ${car.model} ${car.year}`)
+}
+
+consoleCarInfo(carOne)
 
 
+// --- EXAMPLE 3 ---
 
+type tennisPlayerType = {
+  name: string,
+  age: number,
+  ranking: number,
+  competing: boolean
+}
 
+let tennisPlayer = {
+  name: 'Alexander',
+  age: 26,
+  ranking: 34,
+  competing: true
+}
 
-// -------------------------------
+/* getRanking() receives a player object of tennisPlayerType and
+   returns a number */
+
+let getRanking: (player: tennisPlayerType) => number;
+
+getRanking = (player) => {
+  return player.ranking
+}
+
+/*** It can ALSO be written like this: 
+
+let getRanking: Function;
+
+getRanking = (player: tennisPlayerType): number => {
+  return player.ranking
+}
+
+****/
+
+console.log(`Ranking: ${getRanking(tennisPlayer)}`)
+
+// --- Example 4 ---
 
 let calc: (a: number, b: number, action: string) => number | undefined;
 
@@ -83,36 +141,23 @@ calc = (a, b, action) => {
   else if (action === 'remainder') return a % b
 }
 
-
-// -------------------------------
+/** 
+ * @abstract --- The DOM and Type Casting
+ */
 
 const divElement = document.getElementById('root') as HTMLDivElement
 
-
-// ------------------------------
-
-import { Rainbow } from './classes/rainbow.js'
-
-let rainbows: any = []
-
-// Populate rainbows[]
-for (let i = 0; i < 5; i++) {
-  rainbows = [new Rainbow(), ...rainbows]
-}
-
-rainbows.forEach((rainbow: any) => {
-  console.log(rainbow.lifeSpan)
-})
-
-// ------- Interfaces #16 ----------------------
+/**
+ * @abstract --- Interfaces ---
+ */
 
 interface dogInterface {
-  name: string
-  age: number
-  isAngry: boolean
-  getAngry(): void
-  chill(): void
-  roar(): void
+  name: string;
+  age: number;
+  isAngry: boolean;
+  getAngry(): void;
+  chill(): void;
+  roar(): void;
 }
 
 let lion = {
@@ -124,55 +169,13 @@ let lion = {
   roar() { console.log('Grrrrr!!') }
 }
 
-async function boderLion() {
+function boderLion() {
   return lion.getAngry()
 }
 
-setTimeout(() => {
-  console.log('Im going to boder the lion...')
-
-  setTimeout(() => {
-    console.log('The lion god mad...')
-  }, 1000)
-
-  setTimeout(() => {
-    lion.roar()
-  }, 3000)
-
-  setTimeout(() => {
-    boderLion().then(
-      function () {
-        if (lion.isAngry)
-          console.log('Is the lion angry? ')
-        lion.roar()
-      }
-    )
-  }, 5000)
-
-  setTimeout(() => {
-    if (lion.isAngry) console.log('Well... yea, what did you expect? are you stupid or what?')
-  }, 7000)
-
-  setTimeout(() => {
-    async function chillLion() {
-      lion.chill()
-    }
-
-    chillLion().then(
-      function () { console.log('Is the lion still angry? ') }
-    )
-  }, 10000)
-
-  setTimeout(() => {
-    if (!lion.isAngry) { console.log('No.. He is now chill') }
-  }, 14000)
-
-}, 1000)
-
-// ----------- Generics #18 -------------
 
 /** 
- * @abstract
+ * @abstract --- Generics ---
  * - In this case <T> captures the properties passed in to the function 
  * - 'extends object' means that if a non object (example: addUID(34)) 
  * is passed as an argument to the function it will throw an error.
@@ -193,11 +196,8 @@ let newPersonObj = addUID({ name: 'Gabriel', age: 33 })
 
 
 /**
- * @abstract
  * <T extends object> can be more specific by replacing the object with types
- * 
  * Example: <T extends {name: string, age: number}>
- * 
  */
 
 interface objType {
@@ -233,13 +233,15 @@ const docThree: Resource<object> = {     // <--- It is specified that <T> is an 
 }
 
 
-// --------- Tuples #20 --------------
+/**
+ * @abstract --- Tuples ---
+ */
 
 let values: [number, string, boolean]
 
 values = [23, 'some text', false]
 
-// values = ['some text', 34, 23]   // <--- wavy underline
+// values = ['some text', 34, 23]   // <--- shows error
 
 
 
