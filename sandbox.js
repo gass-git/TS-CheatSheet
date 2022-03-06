@@ -2,15 +2,6 @@
 /**
  * @abstract --- Explicit Types ---
  */
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 let rocketName;
 let nationality;
 let haight; // meters
@@ -21,7 +12,7 @@ nationality = 'German';
 haight = 70;
 weight = 30000;
 readyForLunch = true;
-readyForLunch = 'false'; // <--- Throws error
+readyForLunch = 'false'; // <--- shows error
 /**
  * @abstract --- TS Function Basics ---
  *
@@ -67,12 +58,23 @@ let tennisPlayer = {
     ranking: 34,
     competing: true
 };
+/* getRanking() receives a player object of tennisPlayerType and
+   returns a number */
 let getRanking;
 getRanking = (player) => {
     return player.ranking;
 };
+/*** It can ALSO be written like this:
+
+let getRanking: Function;
+
+getRanking = (player: tennisPlayerType): number => {
+  return player.ranking
+}
+
+****/
 console.log(`Ranking: ${getRanking(tennisPlayer)}`);
-// -------------------------------
+// --- Example 4 ---
 let calc;
 calc = (a, b, action) => {
     if (action === 'sum')
@@ -84,7 +86,9 @@ calc = (a, b, action) => {
     else if (action === 'remainder')
         return a % b;
 };
-// -------------------------------
+/**
+ * @abstract --- The DOM and Type Casting
+ */
 const divElement = document.getElementById('root');
 let lion = {
     name: 'Choki',
@@ -95,46 +99,10 @@ let lion = {
     roar() { console.log('Grrrrr!!'); }
 };
 function boderLion() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return lion.getAngry();
-    });
+    return lion.getAngry();
 }
-setTimeout(() => {
-    console.log('Im going to boder the lion...');
-    setTimeout(() => {
-        console.log('The lion god mad...');
-    }, 1000);
-    setTimeout(() => {
-        lion.roar();
-    }, 3000);
-    setTimeout(() => {
-        boderLion().then(function () {
-            if (lion.isAngry)
-                console.log('Is the lion angry? ');
-            lion.roar();
-        });
-    }, 5000);
-    setTimeout(() => {
-        if (lion.isAngry)
-            console.log('Well... yea, what did you expect? are you stupid or what?');
-    }, 7000);
-    setTimeout(() => {
-        function chillLion() {
-            return __awaiter(this, void 0, void 0, function* () {
-                lion.chill();
-            });
-        }
-        chillLion().then(function () { console.log('Is the lion still angry? '); });
-    }, 10000);
-    setTimeout(() => {
-        if (!lion.isAngry) {
-            console.log('No.. He is now chill');
-        }
-    }, 14000);
-}, 1000);
-// ----------- Generics #18 -------------
 /**
- * @abstract
+ * @abstract --- Generics ---
  * - In this case <T> captures the properties passed in to the function
  * - 'extends object' means that if a non object (example: addUID(34))
  * is passed as an argument to the function it will throw an error.
@@ -156,7 +124,9 @@ const docThree = {
     resourceName: 'person',
     data: { name: 'shaun' }
 };
-// --------- Tuples #20 --------------
+/**
+ * @abstract --- Tuples ---
+ */
 let values;
 values = [23, 'some text', false];
-// values = ['some text', 34, 23]   // <--- wavy underline
+// values = ['some text', 34, 23]   // <--- shows error
