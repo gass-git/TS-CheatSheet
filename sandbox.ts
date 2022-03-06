@@ -15,7 +15,6 @@ let dog = {
   age: 6
 }
 
-
 // -------------------------------
 
 let greet: (a: string, b: string) => void;
