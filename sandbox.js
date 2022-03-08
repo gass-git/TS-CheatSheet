@@ -1,6 +1,8 @@
 "use strict";
 /**
- * @abstract --- Explicit Types ---
+ * ------------------------------------
+ *         Explicit Types
+ * ------------------------------------
  */
 let rocketName;
 let nationality;
@@ -14,8 +16,9 @@ weight = 30000;
 readyForLunch = true;
 readyForLunch = 'false'; // <--- shows error
 /**
- * @abstract --- TS Function Basics ---
- *
+ * --------------------------------------
+ *          TS Function Basics
+ * --------------------------------------
  */
 // --- EXAMPLE 1 ---
 let add;
@@ -87,7 +90,9 @@ calc = (a, b, action) => {
         return a % b;
 };
 /**
- * @abstract --- The DOM and Type Casting
+ * --------------------------------------
+ *       The DOM and Type Casting
+ * --------------------------------------
  */
 const divElement = document.getElementById('root');
 let lion = {
@@ -102,12 +107,15 @@ function boderLion() {
     return lion.getAngry();
 }
 /**
- * @abstract --- Generics ---
+ * ------------------
+ *     Generics
+ * ------------------
+ *
  * - In this case <T> captures the properties passed in to the function
  * - 'extends object' means that if a non object (example: addUID(34))
  * is passed as an argument to the function it will throw an error.
  *
- * */
+ */
 function addUID(obj) {
     let UID = Math.floor(Math.random() * 100);
     return Object.assign(Object.assign({}, obj), { id: UID });
@@ -125,7 +133,9 @@ const docThree = {
     data: { name: 'shaun' }
 };
 /**
- * @abstract --- Tuples ---
+ * ------------------
+ *       Tuples
+ * ------------------
  */
 let values;
 values = [23, 'some text', false];

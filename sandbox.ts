@@ -1,5 +1,8 @@
+
 /** 
- * @abstract --- Explicit Types ---
+ * ------------------------------------
+ *         Explicit Types
+ * ------------------------------------
  */
 
 let rocketName: string;
@@ -17,10 +20,12 @@ readyForLunch = true
 readyForLunch = 'false' // <--- shows error
 
 
-/**
- * @abstract --- TS Function Basics ---
- * 
+/** 
+ * --------------------------------------
+ *          TS Function Basics
+ * --------------------------------------
  */
+
 
 // --- EXAMPLE 1 ---
 
@@ -53,9 +58,13 @@ let greet: (a: string, b: string) => void;
 greet = (a, b) => console.log(`${a} ${b}`)
 
 
-/**
- * @abstract --- Type Aliases and Function Signatures ---
+
+/** 
+ * ---------------------------------------------------
+ *       Type Aliases and Function Signatures
+ * ---------------------------------------------------
  */
+
 
 // --- EXAMPLE 1 ---
 
@@ -142,8 +151,11 @@ calc = (a, b, action) => {
 }
 
 /** 
- * @abstract --- The DOM and Type Casting
+ * --------------------------------------
+ *       The DOM and Type Casting
+ * --------------------------------------
  */
+
 
 const divElement = document.getElementById('root') as HTMLDivElement
 
@@ -175,12 +187,15 @@ function boderLion() {
 
 
 /** 
- * @abstract --- Generics ---
+ * ------------------
+ *     Generics
+ * ------------------ 
+ *
  * - In this case <T> captures the properties passed in to the function 
  * - 'extends object' means that if a non object (example: addUID(34)) 
  * is passed as an argument to the function it will throw an error.
  * 
- * */
+ */
 
 function addUID<T extends object>(obj: T) {
   let UID = Math.floor(Math.random() * 100)
@@ -233,8 +248,10 @@ const docThree: Resource<object> = {     // <--- It is specified that <T> is an 
 }
 
 
-/**
- * @abstract --- Tuples ---
+/** 
+ * ------------------
+ *       Tuples
+ * ------------------ 
  */
 
 let values: [number, string, boolean]
