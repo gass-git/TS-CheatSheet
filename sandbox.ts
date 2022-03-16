@@ -160,7 +160,7 @@ calc = (a, b, action) => {
 const divElement = document.getElementById('root') as HTMLDivElement
 
 /**
- * @abstract --- Interfaces ---
+ * --- Interfaces ---
  */
 
 interface dogInterface {
@@ -172,7 +172,7 @@ interface dogInterface {
   roar(): void;
 }
 
-let lion = {
+let lion: dogInterface = {
   name: 'Choki',
   age: 7,
   isAngry: false,
