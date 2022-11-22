@@ -20,6 +20,25 @@ readyForLunch = true
 readyForLunch = 'false' // <--- shows error
 
 
+/* 
+--- arrays and union types 
+*/
+
+const turtleNames: string[] = ['steve', 'mario']
+
+// equivalent
+const turtleNames_2: Array<string> = ['steve', 'mario']
+
+const randomThings: Array<any> = [2, 'mario']
+
+// union types
+const randomStuff: (string|number)[] = [2, 'a table']
+
+// equivalent 
+const randomeStuff_2: Array<string|number> = [2, 'a table']
+
+
+
 /** 
  * --------------------------------------
  *          TS Function Basics
@@ -162,7 +181,7 @@ console.log(`Ranking: ${getRanking(tennisPlayer)}`)
 type A = 'sum' | 'multiply' | 'divide' | 'remainder'
 type R = number | undefined
 
-let calc: (a: number, b: number, action: A) => number | undefined;
+let calc: (a: number, b: number, action: A) => R;
 
 calc = (a, b, action) => {
   if (action === 'sum') return a + b
@@ -186,7 +205,6 @@ function calc_2(a:number, b:number, action:A):R{
  *       The DOM and Type Casting
  * --------------------------------------
  */
-
 
 const divElement = document.getElementById('root') as HTMLDivElement
 
@@ -222,13 +240,13 @@ function boderLion() {
  *     Generics
  * ------------------ 
  *
- * - In this case <T> captures the properties passed in to the function 
+ * - In this case <T> captures the properties passed into the function 
  * - 'extends object' means that if a non object (example: addUID(34)) 
- * is passed as an argument to the function it will throw an error.
- * 
+ * is passed as an argument to the function it will throw an error. This
+ * is because it expects an object.
  */
 
-function addUID<T extends object>(obj: T) {
+function addUID<T extends object>(obj: T):object {
   let UID = Math.floor(Math.random() * 100)
   return {
     ...obj,
@@ -240,18 +258,19 @@ let newPersonObj = addUID({ name: 'Gabriel', age: 33 })
 
 // let newPersonObj2 = addUID(34)   <-- this will show an error
 
-
 /**
  * <T extends object> can be more specific by replacing the object with types
  * Example: <T extends {name: string, age: number}>
  */
 
-interface objType {
+interface User {
   name: string;
   age: number;
 }
 
-function addScore<T extends objType>(obj: T) {
+// the following f() expects an object with a User interface
+
+function addScore<T extends User>(obj: T):object {
   let score = Math.floor(Math.random() * 100)
   return {
     ...obj,
@@ -262,7 +281,6 @@ function addScore<T extends objType>(obj: T) {
 let newObj = addScore({ name: 'Gass', age: 23 })
 
 console.log(newObj)
-
 
 /* Another example of Generics */
 
@@ -292,5 +310,47 @@ values = [23, 'some text', false]
 // values = ['some text', 34, 23]   // <--- shows error
 
 
+
+
+/** 
+ * ------------------
+ *      Enum
+ * ------------------ 
+ * enums are read only properties. If you don't assign a value
+ * to them, they will automaticaly assign one and it will be a number.
+ * (by default they will be indexes) If one of those enums are assigned
+ * a value, the indexes will sum up starting from that number.
+ */
+
+enum JacketPrices{
+  one = 30000,
+  two = 40000,
+  three = 20000
+}
+
+// equivalent to 
+const jacketPrices_2 = {
+  one:30000,
+  two:40000,
+  three:20000
+} as const
+
+// the following throws error because enums are like const, they are read-only
+JacketPrices.one = 200 
+
+// equivalent to 
+jacketPrices_2.one = 200 // throws error because the props are const (read-only)
+
+
+
+type Jacket = 'one' | 'two' | 'three'
+
+function getPrice(jacket:Jacket):number | undefined{
+  switch(jacket){
+    case 'one': return JacketPrices.one
+    case 'two': return JacketPrices.two
+    case 'three': return JacketPrices.three
+  }
+}
 
 
