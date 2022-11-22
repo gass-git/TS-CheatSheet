@@ -341,8 +341,6 @@ JacketPrices.one = 200
 // equivalent to 
 jacketPrices_2.one = 200 // throws error because the props are const (read-only)
 
-
-
 type Jacket = 'one' | 'two' | 'three'
 
 function getPrice(jacket:Jacket):number | undefined{
@@ -353,4 +351,43 @@ function getPrice(jacket:Jacket):number | undefined{
   }
 }
 
+// ------
 
+enum Prices{
+  orange = 500,
+  apple,
+  avocado
+}
+
+console.log(Prices.avocado) // <-- this logs: 502
+
+// equivalent
+const prices = {
+  orange:500,
+  appple:501,
+  avocado:502
+} as const
+
+
+// another example
+enum IntegerNumbers{
+  zero,
+  one,
+  two,
+  three,
+  four,
+  five
+}
+
+console.log(IntegerNumbers.five) // <-- logs: 3
+
+let count: Function;
+
+count = ():void => {
+  setTimeout(() => console.log(IntegerNumbers.zero),1000)
+  setTimeout(() => console.log(IntegerNumbers.one), 2000)
+  setTimeout(() => console.log(IntegerNumbers.two), 3000)
+  setTimeout(() => console.log(IntegerNumbers.three), 4000)
+}
+
+count() // <-- it will count until the number three
