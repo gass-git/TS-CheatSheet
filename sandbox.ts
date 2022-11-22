@@ -239,13 +239,26 @@ function boderLion() {
  * ------------------
  *     Generics
  * ------------------ 
- *
- * - In this case <T> captures the properties passed into the function 
+ */
+ 
+// In this case <T> captures the properties passed into the function 
+function addWidthProp<T>(obj: T){
+  return {...obj, width: 'unknown'}
+}
+
+const furniture = addWidthProp({
+  name:'table',
+  weight:'34kg',
+  height:'120cm' 
+})
+
+console.log(furniture.width)
+
+/*
  * - 'extends object' means that if a non object (example: addUID(34)) 
  * is passed as an argument to the function it will throw an error. This
  * is because it expects an object.
  */
-
 function addUID<T extends object>(obj: T):object {
   let UID = Math.floor(Math.random() * 100)
   return {
