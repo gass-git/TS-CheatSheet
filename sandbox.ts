@@ -7,13 +7,13 @@
 
 let rocketName: string;
 let nationality: string;
-let haight: number;                    // meters
+let height: number;                    // meters
 let weight: number | string;           // kilograms  
 let readyForLunch: boolean;
 
 rocketName = 'Astrolux'
 nationality = 'German'
-haight = 70
+height = 70
 weight = 30000
 readyForLunch = true
 
@@ -33,7 +33,7 @@ let add: Function;
 
 /* if a 'c' parameter is not passed to the function it will
  use 2 as the default value */
-add = (a: number, b: number, c: number = 2) => {
+ add = (a: number, b: number, c: number = 2) => {
   return a + b + c
 }
 
@@ -42,13 +42,15 @@ console.log(add(2, 3))   // <--- outputs: 7
 
 // --- EXAMPLE 2 ---
 
-let remainder: Function;
-
 // Explicitly show that this function returns a number
-remainder = (a: number, b: number): number => {
+const remainder: Function = (a: number, b: number): number => {
   return a % b
 }
 
+// The same function written in a different way
+function remainder_2(a:number, b:number):number{
+  return a % b
+}
 
 // --- EXAMPLE 3 ---
 
@@ -57,6 +59,10 @@ let greet: (a: string, b: string) => void;
 
 greet = (a, b) => console.log(`${a} ${b}`)
 
+// equivalent to 
+function greet_2(a:string,b:string):void{
+  console.log(`${a} ${b}`)
+}
 
 
 /** 
@@ -68,10 +74,17 @@ greet = (a, b) => console.log(`${a} ${b}`)
 
 // --- EXAMPLE 1 ---
 
-type dogObjType = { name: string, age: number }
+type Dog = { name: string, age: number }
 
-function consolePhrase(object: dogObjType) {
-  console.log('The dog named ' + object.name + ' is ' + object.age + ' years old')
+function consolePhrase(dog:Dog):void {
+  console.log('The dog named ' + dog.name + ' is ' + dog.age + ' years old')
+}
+
+// equivalent to
+let consolePhrase_2: (dog:Dog) => void;
+
+consolePhrase_2 = (dog) => {
+  console.log('The dog named ' + dog.name + ' is ' + dog.age + ' years old')
 }
 
 let dog = {
@@ -83,7 +96,7 @@ consolePhrase(dog)
 
 // --- EXAMPLE 2 ---
 
-type carObjectType = {
+type Car = {
   brand: string,
   model: string,
   year: number
@@ -95,16 +108,20 @@ let carOne = {
   year: 2005
 }
 
-function consoleCarInfo(car: carObjectType): void {
+function consoleCarInfo(car: Car): void {
   console.log(`${car.brand} ${car.model} ${car.year}`)
 }
 
-consoleCarInfo(carOne)
+// equivalent to 
+let carInfo: (car:Car) => void = (car) => {
+  console.log(`${car.brand} ${car.model} ${car.year}`)
+}
 
+carInfo(carOne)
 
 // --- EXAMPLE 3 ---
 
-type tennisPlayerType = {
+type tennisPlayer = {
   name: string,
   age: number,
   ranking: number,
@@ -121,33 +138,47 @@ let tennisPlayer = {
 /* getRanking() receives a player object of tennisPlayerType and
    returns a number */
 
-let getRanking: (player: tennisPlayerType) => number;
+let getRanking: (player: tennisPlayer) => number;
 
 getRanking = (player) => {
   return player.ranking
 }
 
-/*** It can ALSO be written like this: 
+// equivalent to
+let getRanking_2: Function;
 
-let getRanking: Function;
-
-getRanking = (player: tennisPlayerType): number => {
+getRanking_2 = (player: tennisPlayer): number => {
   return player.ranking
 }
 
-****/
+// equivalent to 
+function getRanking_3(player: tennisPlayer):number{
+  return player.ranking
+}
 
 console.log(`Ranking: ${getRanking(tennisPlayer)}`)
 
 // --- Example 4 ---
+type A = 'sum' | 'multiply' | 'divide' | 'remainder'
+type R = number | undefined
 
-let calc: (a: number, b: number, action: string) => number | undefined;
+let calc: (a: number, b: number, action: A) => number | undefined;
 
 calc = (a, b, action) => {
   if (action === 'sum') return a + b
   else if (action === 'multiply') return a * b
   else if (action === 'divide') return a / b
   else if (action === 'remainder') return a % b
+}
+
+// equivalent to
+function calc_2(a:number, b:number, action:A):R{
+  switch(action){
+    case 'sum': return a+b
+    case 'multiply': return a*b
+    case 'divide': return a/b
+    case 'remainder': return a%b
+  }
 }
 
 /** 
